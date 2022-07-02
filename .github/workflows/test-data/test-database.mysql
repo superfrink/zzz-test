@@ -1,0 +1,3 @@
+create table mytable (foo varchar, bar varchar);
+insert into mytable (foo, bar) values ('asdf', 'zzz');
+insert into mytable (foo, bar) values ('lmno', 'yyy');

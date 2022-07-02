@@ -11,4 +11,7 @@ jobs:
       - run: |
           sudo systemctl start mysql.service
           mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+	  pwd
+	  mysql ${{ env.DB_DATABASE }} < test-data/test-database.mysql
+
 
