@@ -16,6 +16,6 @@ jobs:
           mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
           pwd
           ls -la
-          mysql ${{ env.DB_DATABASE }} < test-data/test-database.mysql
+          mysql -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }} ${{ env.DB_DATABASE }} < test-data/test-database.mysql
 
 
