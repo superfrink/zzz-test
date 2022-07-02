@@ -9,12 +9,24 @@ my $password = $ENV{'DB_PASSWORD'};
 my $dsn = "DBI:mysql:database=$database";
 my $dbh = DBI->connect($dsn, $user, $password);
 
+my $failed = 0;
+
 my $sth = $dbh->prepare(
     'SELECT * from mytable WHERE foo = ?')
     or die "prepare statement failed: $dbh->errstr()";
-$sth->execute() or die "execution failed: $dbh->errstr()";
+$sth->execute('asdf') or die "execution failed: $dbh->errstr()";
 print $sth->rows . " rows found.\n";
+if (1 != $sth->rows) {
+    $failed ++;
+    print STDERR "'asdf' row not found\n";
+}
 while (my $ref = $sth->fetchrow_hashref()) {
     print "Found row: id = $ref->{'id'}, fn = $ref->{'first_name'}\n";
 }
 $sth->finish;
+
+# goal: check for failed testw
+
+if (0 != $failed) {
+    die "Tests failed: ", $failed, "\n";
+}
