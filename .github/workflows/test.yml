@@ -8,7 +8,10 @@ jobs:
       DB_USER: root
       DB_PASSWORD: root
     steps:
-      - run: |
+      - uses: actions/checkout@v3
+      - name: mysql
+        working-directory: ./.github/workflows/
+        run: |
           sudo systemctl start mysql.service
           mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
           pwd
