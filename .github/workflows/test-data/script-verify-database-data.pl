@@ -9,16 +9,28 @@ my $password = $ENV{'DB_PASSWORD'};
 my $dsn = "DBI:mysql:database=$database";
 my $dbh = DBI->connect($dsn, $user, $password);
 
-my $failed = 0;
-
 sub look_for_row_foo($);
 
-my $row_count = look_for_row_foo('asdf');
+my $failed = 0;
+my $row_count;
+
+$row_count = look_for_row_foo('asdf');
 if (1 != $row_count) {
     $failed ++;
     print STDERR "'asdf' row not found\n";
 }
 
+$row_count = look_for_row_foo('lmno');
+if (1 != $row_count) {
+    $failed ++;
+    print STDERR "'lmno' row not found\n";
+}
+
+$row_count = look_for_row_foo('nosuchrow');
+if (0 != $row_count) {
+    $failed ++;
+    print STDERR "'nosuchrow' row found\n";
+}
 
 # goal: check for failed testw
 
@@ -27,7 +39,7 @@ if (0 != $failed) {
 }
 
 
-sub look_for_row_foo() {
+sub look_for_row_foo($) {
 
     my $foo = shift;
 
