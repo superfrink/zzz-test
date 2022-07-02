@@ -5,7 +5,7 @@ use DBI;
 
 my $database = $ENV{'DB_DATABASE'};
 my $user = $ENV{'DB_USER'};
-my $password = $ENV{'DB_PASSWORDJ'};
+my $password = $ENV{'DB_PASSWORD'};
 my $dsn = "DBI:mysql:database=$database";
 my $dbh = DBI->connect($dsn, $user, $password);
 
