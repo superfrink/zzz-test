@@ -21,7 +21,35 @@ if (1 != $sth->rows) {
     print STDERR "'asdf' row not found\n";
 }
 while (my $ref = $sth->fetchrow_hashref()) {
-    print "Found row: id = $ref->{'id'}, fn = $ref->{'first_name'}\n";
+    print "Found row: foo = $ref->{'foo'}, bar = $ref->{'bar'}\n";
+}
+$sth->finish;
+
+$sth = $dbh->prepare(
+    'SELECT * from mytable WHERE foo = ?')
+    or die "prepare statement failed: $dbh->errstr()";
+$sth->execute('lmno') or die "execution failed: $dbh->errstr()";
+print $sth->rows . " rows found.\n";
+if (1 != $sth->rows) {
+    $failed ++;
+    print STDERR "'lmno' row not found\n";
+}
+while (my $ref = $sth->fetchrow_hashref()) {
+    print "Found row: foo = $ref->{'foo'}, bar = $ref->{'bar'}\n";
+}
+$sth->finish;
+
+$sth = $dbh->prepare(
+    'SELECT * from mytable WHERE foo = ?')
+    or die "prepare statement failed: $dbh->errstr()";
+$sth->execute('nosuchrow') or die "execution failed: $dbh->errstr()";
+print $sth->rows . " rows found.\n";
+if (0 != $sth->rows) {
+    $failed ++;
+    print STDERR "'nosuchrow' row found\n";
+}
+while (my $ref = $sth->fetchrow_hashref()) {
+    print "Found row: foo = $ref->{'foo'}, bar = $ref->{'bar'}\n";
 }
 $sth->finish;
 
