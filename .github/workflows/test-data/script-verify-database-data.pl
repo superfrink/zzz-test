@@ -15,18 +15,21 @@ my $failed = 0;
 my $row_count;
 
 $row_count = look_for_row_foo('asdf');
+print "found ", $row_count, " rows\n";
 if (1 != $row_count) {
     $failed ++;
     print STDERR "'asdf' row not found\n";
 }
 
 $row_count = look_for_row_foo('lmno');
+print "found ", $row_count, " rows\n";
 if (1 != $row_count) {
     $failed ++;
     print STDERR "'lmno' row not found\n";
 }
 
 $row_count = look_for_row_foo('nosuchrow');
+print "found ", $row_count, " rows\n";
 if (0 != $row_count) {
     $failed ++;
     print STDERR "'nosuchrow' row found\n";
