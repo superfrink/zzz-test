@@ -6,7 +6,7 @@ use DBI;
 my $database = $ENV{'DB_DATABASE'};
 my $user = $ENV{'DB_USER'};
 my $password = $ENV{'DB_PASSWORDJ'};
-my $dsn = "DBI:mysql:database=$database;host=127.0.0.0;port=3306";
+my $dsn = "DBI:mysql:database=$database";
 my $dbh = DBI->connect($dsn, $user, $password);
 
 my $sth = $dbh->prepare(
