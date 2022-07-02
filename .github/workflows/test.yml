@@ -15,6 +15,10 @@ jobs:
           sudo systemctl start mysql.service
           mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
           mysql -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }} ${{ env.DB_DATABASE }} < test-data/test-database.mysql
+      - name: cpan
+        working-directory: ./.github/workflows/
+        run: |
+          sudo apt-get install libdbd-mysql-perl
       - name: verifymysql
         working-directory: ./.github/workflows/
         run: |
